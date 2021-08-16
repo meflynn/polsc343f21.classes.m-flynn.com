@@ -38,7 +38,7 @@ class: center, middle
 <br>
 <br>
 ```{r, dpi = 400, fig.align='center', fig.height=5, fig.width=5, echo=FALSE, fig.cap="mRNA Vaccines", out.width="100%"}
-knitr::include_graphics(here::here("lectures/media/vaccines.jpg"))
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/b/b0/Moderna_COVID-19_vaccine.jpg")
 ```
 ]
 
@@ -48,7 +48,7 @@ knitr::include_graphics(here::here("lectures/media/vaccines.jpg"))
 <br>
 <br>
 ```{r, dpi = 400, fig.align='center',  fig.height=5, fig.width=5, echo = FALSE, fig.cap="N95 Masks", out.width="100%"}  
-knitr::include_graphics(here::here("lectures/media/n95masks.jpg"))
+knitr::include_graphics("https://www.nj.com/resizer/b0dKI3wPKS7LAo2-ba-ur9dljVk=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/RHPJJZNT4ZAA7GJ4CBTKPIL6VA.JPG")
 ```
 ]
 
