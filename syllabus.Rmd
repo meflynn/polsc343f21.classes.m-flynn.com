@@ -148,10 +148,10 @@ This will serve as your final project. Accordingly, I expect the final content t
 
 Deadlines: 
 
-- September 10: Song/album choices due
-- September 24: Final song/album selection due (5%)
+- September 10: Song/album choices due (2.5%)
+- September 24: Final song/album selection due (2.5%)
 - October 29: Annotated bibliography due (10%)
-- November 19: Wiki draft due  (10%)
+- November 19: Wiki draft due  (5%)
 - December 10: Final Wiki page due (10%)
   
   
