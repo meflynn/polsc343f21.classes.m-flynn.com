@@ -38,7 +38,7 @@ class: center, middle
 <br>
 <br>
 ```{r, dpi = 400, fig.align='center', fig.height=5, fig.width=5, echo=FALSE, fig.cap="mRNA Vaccines", out.width="100%"}
-knitr::include_graphics(here::here("media/vaccines.jpeg")) 
+knitr::include_graphics(here::here("lectures/media/vaccines.jpg"))
 ```
 ]
 
@@ -48,7 +48,7 @@ knitr::include_graphics(here::here("media/vaccines.jpeg"))
 <br>
 <br>
 ```{r, dpi = 400, fig.align='center',  fig.height=5, fig.width=5, echo = FALSE, fig.cap="N95 Masks", out.width="100%"}  
-knitr::include_graphics(here::here("media/n95masks.jpg"))
+knitr::include_graphics(here::here("lectures/media/n95masks.jpg"))
 ```
 ]
 
