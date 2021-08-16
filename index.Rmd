@@ -1,0 +1,6 @@
+---
+title: "POLSC 343 US Foreign Policy"
+site: distill::distill_website
+---
+
+Welcome, this page will serve as the homepage for POLSC 343 US foreign policy (Fall 2021).
