@@ -4,12 +4,11 @@ description: |
   This classes focuses on the interests and institutions that shape US foreign policy over time.
 base_url: https://polsc343.classes.m-flynn.com
 output_dir: "docs"
+theme: sitetheme.css
 navbar:
   right:
     - text: "Home"
       href: index.html
-    - text: "About"
-      href: about.html
     - text: "Syllabus"
       href: syllabus.html
     - text: "Lectures"
