@@ -1,5 +1,6 @@
 ---
-title: "POLSC 343 US Foreign Policy"
+title: "US Foreign Policy"
+subtitle: "POLSC 343 Fall 2021"
 site: distill::distill_website
 ---
 
