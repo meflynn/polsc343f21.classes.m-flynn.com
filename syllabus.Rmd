@@ -1,7 +1,7 @@
 ---
 title: "POLSC 343 US Foreign Policy"
 date: "`r Sys.Date()`"
-bibliography: "bib/classrefs-polsc343-2021.bib"
+bibliography: "../../classrefs.bib"
 csl: "bib/apsr-bibliography.csl"
 output: 
   distill::distill_article:
@@ -411,11 +411,14 @@ ggplot(dfr, aes(x = day, y = reorder(week, -week), fill = comment)) +
 
 - Reading @keane2015
 
+
+
 ## `r advdate(mon, 7)`: The Defense Department and the Military
 
 ### Readings and Assignments:
 
 - Read @brooks2016
+
 
 
 ## `r advdate(mon, 8)`: The Policymaking Process
@@ -427,13 +430,12 @@ ggplot(dfr, aes(x = day, y = reorder(week, -week), fill = comment)) +
 
 
 
-
 ## `r advdate(mon, 9)`: The Use of Military Force
 
 ### Readings and Assignments:
 
 - Watch [Restrepo](https://watchdocumentaries.com/restrepo/)
-- Read @brooks2015
+- Read @sigar2019
 
 
 ## `r advdate(mon, 10)`: Alliance Relationships
