@@ -15,6 +15,16 @@ output:
       titleSlideClass: [middle, left, inverse]
 ---
 
+```{r setup, include = FALSE}
+library(dagitty)
+library(ggdag)
+library(viridis)
+library(scales)
+library(dplyr)
+knitr::opts_chunk$set(dpi = 400, fig.align = "center", fig.height = 5, fig.width = 8)
+
+```
+
 
 # Welcome!
 
@@ -51,6 +61,139 @@ knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/b/b0/Mod
 knitr::include_graphics("https://www.nj.com/resizer/b0dKI3wPKS7LAo2-ba-ur9dljVk=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/RHPJJZNT4ZAA7GJ4CBTKPIL6VA.JPG")
 ```
 ]
+
+
+
+---
+class: left, top
+
+# But also...
+
+We want to start thinking about events in a different way
+
+- Causal relationships
+
+- Predictive relationships
+
+
+---
+class: center, middle
+
+```{r, dpi = 400, echo = FALSE}
+
+dag.df <- dagitty(' dag{
+                  "x" [exposure]
+                  "y" [outcome]
+                  
+                  "x" [pos="1,1"]
+                  "y" [pos="2,1"]
+                  "z" [pos="1.5,2"]
+                  
+                  "x" -> "y"
+                  "y" <- "z" -> "x"
+}') %>% 
+  tidy_dagitty()
+
+
+
+ggplot(dag.df %>% filter(name != "z"), aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_dag_point(aes(color = name), show.legend = FALSE) +
+  geom_dag_edges() +  
+  geom_text(aes(label = name), color = "white", size = 5, parse = TRUE) +
+  theme_dag() +
+  scale_color_viridis(discrete = TRUE, begin = 0.1, end = 0.9) 
+
+```
+
+---
+class: center, middle
+
+```{r, dpi = 400, echo = FALSE}
+
+dag.df <- dagitty(' dag{
+                  "x" [exposure]
+                  "y" [outcome]
+                  
+                  "x" [pos="1,1"]
+                  "y" [pos="2,1"]
+                  "z" [pos="1.5,2"]
+                  
+                  "x" -> "y"
+                  "y" <- "z" -> "x"
+}') %>% 
+  tidy_dagitty()
+
+
+
+ggplot(dag.df, aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_dag_point(aes(color = name), show.legend = FALSE) +
+  geom_dag_edges() +  
+  geom_text(aes(label = name), color = "white", size = 5, parse = TRUE) +
+  theme_dag() +
+  scale_color_viridis(discrete = TRUE, begin = 0.1, end = 0.9) 
+
+```
+
+---
+class: left, top
+
+```{r, dpi = 400, echo = FALSE, warning=FALSE}
+
+# Prettier DAG for public consumption in text
+
+dag.pretty <- dagitty(' dag{
+                    "Troops[t]" [exposure]
+                    "Protest[t]" [outcome]
+                    
+                    "Protest[t]" [pos="1,1"]
+                    "Troops[t]" [pos = "0,0"]
+                    "Z[t]" [pos="0,2"]
+                    
+                    "Protest[t-1]" [pos="-1,1"]
+                    "Troops[t-1]" [pos = "-2,0"]
+                    "Z[t-1]" [pos="-2,2"]
+
+                    "Protest[t-1]" -> "Protest[t]"
+                    "Troops[t]" -> "Protest[t]"
+                    "Troops[t-1]" -> "Troops[t]"
+                    "Troops[t-1]" -> "Protest[t-1]"
+                    "Z[t-1]" -> "Z[t]"
+                    "Z[t]" -> "Troops[t]"
+                    
+                    "Troops[t-1]" -> "Protest[t]"
+                    "Z[t-1]" -> "Troops[t-1]"
+                    "Z[t-1]" -> "Protest[t-1]"
+                    "Z[t]" -> "Protest[t]"
+
+                    }') 
+
+
+dag.pretty.tidy <- tidy_dagitty(dag.pretty) %>% 
+  dplyr::mutate(.$data, 
+         vartype = case_when(
+           name == "Troops[t]" ~ "Exposure",
+           name == "Protest[t]" ~ "Outcome",
+           grepl("Z", name) ~ "Confounders",
+           name == "Troops[t-1]" ~ "Lagged Treatment",
+           name == "Protest[t-1]" ~ "Lagged Outcome"
+
+         )) %>% 
+  dag_label(labels = c("Troops[t]" = "Troops[t]", "Troops[t-1]" = "Troops[t-1]", "Protest[t-1]" = "Protest[t-1]",
+                       "Protest[t]" = "Protest[t]", "Z[t]" = "Z[t]", "Z[t-1]" = "Z[t-1]")) 
+
+ 
+ggplot(dag.pretty.tidy, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_point(aes(color = vartype)) +
+  geom_dag_edges() +
+  geom_dag_label_repel(aes(label = label), parse = TRUE) +
+  theme_dag_blank() +
+  guides(color = FALSE) +
+  scale_color_manual(values = c("orange",  "#009E73", muted("dodgerblue1"), muted("009E73"), "dodgerblue1"))
+
+
+```
+
+
 
 ---
 class:left, top
