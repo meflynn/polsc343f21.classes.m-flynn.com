@@ -1,5 +1,6 @@
 ---
-title: "POLSC 343 US Foreign Policy"
+title: "US Foreign Policy"
+description: "Course syllabus"
 date: "`r Sys.Date()`"
 bibliography: "../../classrefs.bib"
 csl: "bib/apsr-bibliography.csl"
@@ -69,7 +70,9 @@ As you may have noticed, we're still in the middle of a pandemic. The Delta vari
 
 **Vaccines**: Vaccination remains our best option to help prevent the spread of, and mitigate the worst effects of, COVID-19. I will not ask your vaccination status at any point, but I strongly urge students who are not currently vaccinated and who are able to talk to your physicians about getting vaccinated. It's safe, effective, and free. You can find information and/or make an appointment at [Lafene Health Center](https://www.k-state.edu/covid-19/vaccine/), [The Riley County Health Department](https://www.rileycountyks.gov/1916/Vaccine-Information), local pharmacies, or your primary care physician.  
 
-**Masks**: Please note that K-State currently has a mask requirement in effect. That means that all students, faculty, staff, and visitors are required to mask while inside buildings at K-State. To state the obvious, this includes students attending lectures. Also please note that some masks are better than others---N95, KN95, FFP2, and similar types of masks offer strong protection against transmission (for example, see [here](https://www.sciencedirect.com/science/article/pii/S0196655320310439?casa_token=3QaMU4BJHh0AAAAA:luVTg-SgOeHvQl3F7_vj54R8RvbEWIwVjLLbs4L6JG7QkbCHfYVRPRiQmfHcRzZDfzOcm5-br4o) and [here](https://www.tandfonline.com/doi/full/10.1080/02786826.2020.1862409)). Gaiters also don't offer as much protection as higher quality masks. Face shields do effectively nothing on their own. You can find more information [here on Emergency Use Authorizations](https://www.fda.gov/medical-devices/coronavirus-disease-2019-covid-19-emergency-use-authorizations-medical-devices/personal-protective-equipment-euas) for various mask types,
+**Masks**: All students are expected to comply with K-State’s face mask policy. As of August 2, 2021, everyone must wear face masks over their mouths and noses in all indoor spaces on university property, including while attending in-person classes. This policy is subject to change at the university’s discretion.
+
+To state the obvious, this includes students attending lectures. Also please note that some masks are better than others---N95, KN95, FFP2, and similar types of masks offer strong protection against transmission (for example, see [here](https://www.sciencedirect.com/science/article/pii/S0196655320310439?casa_token=3QaMU4BJHh0AAAAA:luVTg-SgOeHvQl3F7_vj54R8RvbEWIwVjLLbs4L6JG7QkbCHfYVRPRiQmfHcRzZDfzOcm5-br4o) and [here](https://www.tandfonline.com/doi/full/10.1080/02786826.2020.1862409)). Gaiters also don't offer as much protection as higher quality masks. Face shields do effectively nothing on their own. You can find more information [here on Emergency Use Authorizations](https://www.fda.gov/medical-devices/coronavirus-disease-2019-covid-19-emergency-use-authorizations-medical-devices/personal-protective-equipment-euas) for various mask types,
 
 **Ventilation**: In addition to personal preventative measures, ventilation and air filtration are enormously important in helping to reduce individuals' exposure to the virus. K-State has conducted a review of campus rooms over the last year to determine which rooms needed upgrades to their ventilation systems to ensure proper air flow. 
 
