@@ -68,6 +68,24 @@ knitr::include_graphics("https://www.nj.com/resizer/b0dKI3wPKS7LAo2-ba-ur9dljVk=
 class: left, top
 
 # But also...
+.pull-left[
+
+We want to start thinking about events in a different way
+
+- Causal relationships
+
+- Predictive relationships
+]
+
+.pull-right[
+
+]
+
+---
+class: left, top
+
+# But also...
+.pull-left[
 
 We want to start thinking about events in a different way
 
@@ -76,10 +94,11 @@ We want to start thinking about events in a different way
 - Predictive relationships
 
 
----
-class: center, middle
+]
 
-```{r, dpi = 400, echo = FALSE}
+
+.pull-right[
+```{r, dpi = 400, echo = FALSE, warning = FALSE}
 
 dag.df <- dagitty(' dag{
                   "x" [exposure]
@@ -97,18 +116,32 @@ dag.df <- dagitty(' dag{
 
 
 ggplot(dag.df %>% filter(name != "z"), aes(x = x, xend = xend, y = y, yend = yend)) +
-  geom_dag_point(aes(color = name), show.legend = FALSE) +
+  geom_dag_point(aes(color = name), show.legend = FALSE, size = 20) +
   geom_dag_edges() +  
-  geom_text(aes(label = name), color = "white", size = 5, parse = TRUE) +
+  geom_text(aes(label = name), color = "white", size = 10, parse = TRUE) +
   theme_dag() +
   scale_color_viridis(discrete = TRUE, begin = 0.1, end = 0.9) 
 
 ```
+]
 
 ---
-class: center, middle
+class: left, top
 
-```{r, dpi = 400, echo = FALSE}
+# But also...
+.pull-left[
+
+We want to start thinking about events in a different way
+
+- Causal relationships
+
+- Predictive relationships
+
+- Or complicated
+]
+
+.pull-right[
+```{r, dpi = 400, echo = FALSE, warning=FALSE}
 
 dag.df <- dagitty(' dag{
                   "x" [exposure]
@@ -126,17 +159,33 @@ dag.df <- dagitty(' dag{
 
 
 ggplot(dag.df, aes(x = x, xend = xend, y = y, yend = yend)) +
-  geom_dag_point(aes(color = name), show.legend = FALSE) +
-  geom_dag_edges() +  
-  geom_text(aes(label = name), color = "white", size = 5, parse = TRUE) +
+  geom_dag_point(aes(color = name), show.legend = FALSE, size = 20) +
+  geom_dag_edges(size = 10) +  
+  geom_text(aes(label = name), color = "white", size = 10, parse = TRUE) +
   theme_dag() +
   scale_color_viridis(discrete = TRUE, begin = 0.1, end = 0.9) 
 
 ```
+]
 
 ---
 class: left, top
 
+
+# But also...
+.pull-left[
+
+We want to start thinking about events in a different way
+
+- Causal relationships
+
+- Predictive relationships
+
+- Or **really** complicated
+
+]
+
+.pull-right[
 ```{r, dpi = 400, echo = FALSE, warning=FALSE}
 
 # Prettier DAG for public consumption in text
@@ -183,16 +232,22 @@ dag.pretty.tidy <- tidy_dagitty(dag.pretty) %>%
 
  
 ggplot(dag.pretty.tidy, aes(x = x, y = y, xend = xend, yend = yend)) +
-  geom_dag_point(aes(color = vartype)) +
-  geom_dag_edges() +
-  geom_dag_label_repel(aes(label = label), parse = TRUE) +
+  geom_dag_point(aes(color = vartype), size = 20) +
+  geom_dag_edges(size = 10) +
+  geom_dag_label_repel(aes(label = label), parse = TRUE, size = 7) +
   theme_dag_blank() +
   guides(color = FALSE) +
   scale_color_manual(values = c("orange",  "#009E73", muted("dodgerblue1"), muted("009E73"), "dodgerblue1"))
 
 
 ```
+]
 
+
+---
+class: middle, center, inverse
+
+# Boilerplate Stuff
 
 
 ---
