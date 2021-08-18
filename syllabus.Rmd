@@ -396,6 +396,7 @@ ggplot(dfr, aes(x = day, y = reorder(week, -week), fill = comment)) +
 
 ### Readings and Assignments:
 
+- Read @dudziak2004
 - Read @Fordham2007
 
 
@@ -412,7 +413,8 @@ ggplot(dfr, aes(x = day, y = reorder(week, -week), fill = comment)) +
 
 ### Readings and Assignments:
 
-- Reading @keane2015
+- Read @keane2015
+- Read @zegart2011
 
 
 
@@ -439,6 +441,7 @@ ggplot(dfr, aes(x = day, y = reorder(week, -week), fill = comment)) +
 
 - Watch [Restrepo](https://watchdocumentaries.com/restrepo/)
 - Read @sigar2019
+
 
 
 ## `r advdate(mon, 10)`: Alliance Relationships
@@ -475,6 +478,7 @@ ggplot(dfr, aes(x = day, y = reorder(week, -week), fill = comment)) +
 
 ### Readings and Assignments:
 
+- @milner2013
 - Read @schultz2017
 
 
