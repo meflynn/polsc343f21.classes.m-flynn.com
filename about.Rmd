@@ -19,7 +19,7 @@ output:
 My research focuses on the political economy of US foreign policy, the influence of domestic politics on foreign policy, and the causes and consequences of US military deployments overseas. 
 
 
-##  Interests:  
+##  Interests
 - US Foreign Policy
 - Political Economy of Security
 - Military Deployments
