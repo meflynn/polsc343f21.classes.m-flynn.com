@@ -17,6 +17,8 @@ navbar:
       href: syllabus.html
     - text: "Lectures"
       menu:
-        - text: "01 - Introduction"
-          href: "lectures/introduction.html"
+        - text: "Lecture Archive"
+          href: lectures.html
+        - text: "YouTube Channel"
+          href: https://www.youtube.com/channel/UC7AzCLAufJAMCKkDL77clzw
 output: distill::distill_article
