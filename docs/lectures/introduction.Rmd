@@ -72,6 +72,8 @@ class: left, top
 
 We want to start thinking about events in a different way
 
+- Accurate description
+
 - Causal relationships
 
 - Predictive relationships
@@ -88,6 +90,8 @@ class: left, top
 .pull-left[
 
 We want to start thinking about events in a different way
+
+- Accurate description
 
 - Causal relationships
 
@@ -133,6 +137,8 @@ class: left, top
 
 We want to start thinking about events in a different way
 
+- Accurate description
+
 - Causal relationships
 
 - Predictive relationships
@@ -176,6 +182,8 @@ class: left, top
 .pull-left[
 
 We want to start thinking about events in a different way
+
+- Accurate description
 
 - Causal relationships
 
