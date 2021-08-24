@@ -8,3 +8,5 @@ This page contains lectures delievered throughout the semester. You can click on
 ## Lecture Slides
 
 1. [Course Introduction](lectures/introduction.html)
+
+1. [Historical Background](lectures/historical-background.html)
