@@ -19,6 +19,8 @@ editor_options:
 ---
 ```{r setup, include = FALSE, evaluate = FALSE, echo = FALSE}
 library(tidyverse)
+library(readr)
+library(dplyr)
 library(tidyquant)
 library(plotly)
 library(scales)
@@ -32,8 +34,11 @@ library(rgeos)
 library(sf)
 library(rvest)
 library(maptools)
+library(viridis)
 library(ggmap)
 library(colorRamps)
+library(ggpubr)
+library(ggtext)
 library(RColorBrewer)
 knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.align="center", echo=FALSE, warning=FALSE, error=FALSE, message=FALSE, dpi=400) 
 
@@ -41,10 +46,22 @@ knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.align="center", echo=FALSE
 t <- list(family = "arial",
           size = 18)
 
-theme_flynn <- theme_linedraw() + theme(text = element_text(size = 16),
-                                        plot.title = element_text(face = "bold", size = 20),
-                                        plot.subtitle = element_text(size = 16),
-                                        plot.caption = element_text(face = "italic", size = 8))
+theme_flynn <- function(){ 
+  
+      theme_minimal(base_size = 12, base_family = "Arial") %+replace% 
+        
+        theme(plot.title = element_text(face = "bold", size = 18, hjust = 0, margin = margin(t = 0, b = 0.3, l = 0, r = 0, unit = "cm")),
+              plot.subtitle = element_text(size = 12),
+              plot.caption = element_text(face = "italic", size = 8),
+              strip.background = element_rect(fill = "gray80", color = "black"),
+              strip.text = element_text(color = "black", face = "bold", margin = margin(t = 0.2, b = 0.2, l = 0.2, r = 0.2, unit = "cm")),
+              panel.grid.major = element_line(color = "gray70", size = 0.15),
+              panel.grid.minor = element_line(color = "gray90", size = 0.1),
+              axis.title = element_text(face = "bold", size = 12),
+              axis.title.y = element_text(angle = 90, margin = margin(t = 0, r = 0.5, b = 0, l = 0, unit = "cm")),
+              axis.title.x = element_text(margin = margin(t = 0.5, r = 0, b = 0, l = 0, unit = "cm")),
+              legend.title = element_text(face = "bold", hjust = 0))
+  }
 
 ### Map Data ###
 library(broom)
@@ -227,9 +244,9 @@ class: left, middle
 
 ```{r international-system-size}
 
-systemdata <- read_csv(here("../../../Data Files/COW Data/System/system2011.csv")) %>% 
+systemdata <- readr::read_csv(here::here("../../../Data Files/COW Data/System/system2011.csv")) %>% 
   group_by(year) %>% 
-  summarise(Countries = n_distinct(ccode, na.rm = TRUE)) %>% 
+  dplyr::summarise(Countries = n_distinct(ccode, na.rm = TRUE)) %>% 
   dplyr::rename("Year" = "year")
 
 p1 <- ggplot(data = systemdata, aes(x = Year, y = Countries)) +
@@ -240,8 +257,7 @@ p1 <- ggplot(data = systemdata, aes(x = Year, y = Countries)) +
        title = "International system size, 1815-2010",
        subtitle = "How does the changing size of the international system affect conflict?",
        caption = "Data obtained from the Correlates of War Project: http://www.correlatesofwar.org/") +
-  theme_flynn +
-  theme(text = element_text(size = 16)) 
+  theme_flynn() 
 
 p1
 
@@ -262,7 +278,7 @@ milper <- read_csv(here("../../../Data Files/COW Data/NMC_5_0/NMC_5_0.csv"))  %>
 # US military personnel as percent of population
 p2 <- ggplot(data = milper, aes(x = year, y = milper.per)) +
   geom_area(fill = "deepskyblue", color = "black") +
-  theme_flynn +
+  theme_flynn() +
   scale_x_continuous(breaks = seq(1815, 2015, 20)) +
   scale_y_continuous(breaks = seq(0, 0.10, 0.02), limits = c(0, 0.10), labels = percent) +
   labs(x = "Year",
@@ -301,7 +317,7 @@ mid.time <- tibble(year = seq(1815, 2010)) %>%
 # US MID count over time
 ggplot(data = subset(mid.time, name == "usmidcount"), aes(x = year, y = value)) +
   geom_bar(stat = "identity", color = "black", size = 0.1) +
-  theme_flynn +
+  theme_flynn() +
   theme(text = element_text(size = 16)) +
   scale_x_continuous(breaks = seq(1815, 2010, 20)) +
   scale_y_continuous(breaks = seq(0, 12, 2)) +
@@ -483,7 +499,6 @@ class: left, top
 
 ```{r map-1900}
 
-library(ggpubr)
 
 ggplot() +
  geom_polygon(data = base.1, aes(x = long, y = lat, group = group), fill = "gray80") +
@@ -556,9 +571,10 @@ duration <- campaign %>%
 # Plotting campaign phases over time and by conflict
 ggplot(data = duration, aes(y = reorder(WarAndTheater_Ed196_, startyear), x = startyear, group = WarAndTheater_Ed196_, colour = BattleOrCampaign_Ed197_)) +
   geom_segment(aes(xend = endyear, yend = WarAndTheater_Ed196_), size = 10) +
-  theme_flynn +
+  theme_flynn() +
   theme(plot.title.position = "plot",
         text = element_text(size = 18)) +
+  scale_color_viridis(discrete = TRUE) +
   labs(x = "Time",
        y = "",
        title = "US Army campaigns grouped by major war/theater",
@@ -576,10 +592,11 @@ class: left, middle
 ggplot(data = duration, aes(x = reorder(WarAndTheater_Ed196_, startyear), y = totalduration, group = WarAndTheater_Ed196_, fill = BattleOrCampaign_Ed197_)) +
   geom_bar(stat = "identity") +
   coord_flip() +
-  theme_flynn +
+  theme_flynn() +
   theme(text = element_text(size = 18),
         plot.title.position = "plot") +
   scale_y_continuous(breaks = seq(0, 12000, 2000), limits = c(0,12000)) +
+  scale_color_viridis(discrete = TRUE) +
   labs(y = "Days",
        x = "",
        title = "US Army campaign duration in days",
@@ -632,7 +649,9 @@ class: left, top
 ]
 
 .pull-right[
-![](../../../media/beaver.jpg)
+```{r}
+knitr::include_graphics("https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBeaver&psig=AOvVaw3COOQ5vuyxfDyKFEmCx_-T&ust=1629913902292000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPDHhcucyvICFQAAAAAdAAAAABAD")
+```
 ]
 
 
@@ -676,15 +695,15 @@ class: left, top
 # The Early Years
 
 .pull-left[
-
-
+```{r, fig.cap="Alexander Hamilton"}
+knitr::include_graphics("https://www.kindpng.com/picc/m/174-1740308_transparent-alexander-hamilton-png-download-alexander-hamilton-lin.png")
+```
 ]
 
 .pull-right[
-<figure>
-<img src="../../../media/thomas-jefferson.png" width="500" height="400" alt="Thomas Jefferson" style="position:relative;left:15px; top:-75px;">
-<figcaption> Thomas Jefferson </figcaption>
-</figure>
+```{r, fig.cap="Thomas Jefferson"}
+knitr::include_graphics("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngitem.com%2Fmiddle%2FiwJihoT_thomas-jefferson-png-transparent-png%2F&psig=AOvVaw1c3RBKoQnY0WawF3F2V9t0&ust=1629914008886000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJCznoCdyvICFQAAAAAdAAAAABAD")
+```
 ]
 
 
@@ -1043,7 +1062,7 @@ ggplot(data = subset(spend, Year >= 1870 & Year <= 1914 & group == "spend.navy" 
                        Year >= 1870 & Year <= 1914 & group == "spend.army" |
                        Year >= 1870 & Year <= 1914 & group == "spend.vet"), aes(x = Year, y = value, fill = group)) +
   geom_area(position = "stack", color = "black", size = .1) +
-  theme_flynn +
+  theme_flynn() +
   theme(text = element_text(size = 18)) +
   scale_fill_brewer(labels = c("Army", "Navy", "Veterans"),
                     palette = "Spectral") +
@@ -1070,7 +1089,7 @@ ggplot(data = subset(spend, Year >= 1870 & Year <= 1914 & group == "navy.per" |
                        Year >= 1870 & Year <= 1914 & group == "army.per" |
                        Year >= 1870 & Year <= 1914 & group == "vet.per"), aes(x = Year, y = value, fill = group)) +
   geom_area(position = "stack", color = "black", size = .1) +
-  theme_flynn +
+  theme_flynn() +
   theme(text = element_text(size = 18)) +
   scale_fill_brewer(labels = c("Army", "Navy", "Veterans"),
                     palette = "Spectral") +
@@ -1408,7 +1427,7 @@ trade <- read_csv(here("../../../Data Files/COW Data/COW_Trade_4.0/National_COW_
 
 ggplot(data = subset(trade, year >= 1900 & year <= 1940), aes(x = year, y = totaltrade)) +
   geom_area(fill = "deepskyblue", color = "black", size = 0.1, alpha = .9) +
-  theme_flynn +
+  theme_flynn() +
   theme(text = element_text(size = 18)) +
   scale_x_continuous(breaks = seq(1900, 1940, 5)) +
   scale_y_continuous(breaks = seq(0, 70000, 10000), labels = dollar) +
@@ -1438,7 +1457,7 @@ us.trade <- read_csv(here("../../../Data Files/COW Data/COW_Trade_4.0/National_C
 
 ggplot(data = us.trade, aes(x = year, y = exports)) +
   geom_area(fill = "deepskyblue", color = "black", size = 0.1, alpha = .9) +
-  theme_flynn +
+  theme_flynn() +
   theme(text = element_text(size = 18)) +
   scale_x_continuous(breaks = seq(1900, 1950, 5), limits = c(1900, 1950)) +
   scale_y_continuous(breaks = seq(0, 15000, 3000), labels = dollar) +
@@ -1467,7 +1486,7 @@ gnp <- read.delim(here("../../../Data Files/NBER/GDP/a08166.dat.txt"), sep = " "
 
 ggplot(data = gnp, aes(x = Year, y = GNP)) +
   geom_bar(fill = "deepskyblue", color = "black", size = 0.1, stat = "identity") +
-  theme_flynn +
+  theme_flynn() +
   theme(text = element_text(size = 18)) +
   scale_x_continuous(breaks = seq(1920, 1950, 5), limits = c(1919, 1951)) +
   scale_y_continuous(breaks = seq(0, 175000, 25000), labels = dollar) +
@@ -1490,7 +1509,7 @@ class: middle, center
 ggplot(data = gnp, aes(x = Year, y = gnp.change, group = growth, fill = stat(gnp$gnp.change >0))) +
   geom_bar(stat = "identity", color = "black", size = 0.1) +
   geom_hline(yintercept = 0, color = "black", size = .3) +
-  theme_flynn +
+  theme_flynn() +
   theme(text = element_text(size = 18)) +
   scale_x_continuous(breaks = seq(1920, 1950, 5), limits = c(1919, 1951)) +
   scale_y_continuous(breaks = seq(-0.15, 0.15, 0.05), labels = percent) +
@@ -1521,7 +1540,7 @@ unemp <- read.delim(here("../../../Data Files/NBER/Unemployment/m08292a.dat.txt"
 # US unemployment rate
 ggplot(data = unemp, aes(x = Time, y = Rate/100)) +
   geom_line(size = 0.75) +
-  theme_flynn +
+  theme_flynn() +
   theme(text = element_text(size = 18)) +
   scale_x_date(breaks = seq(as.Date("1930-01-01"), as.Date("1942-01-01"), "2 years"), limits = c(as.Date("1930-01-01"), as.Date("1942-01-01")), date_labels = "%Y %b") +
   scale_y_continuous(breaks = seq(0, 0.25, 0.05), labels = percent) +
@@ -1544,7 +1563,7 @@ class: center, middle
 unemp.fig.2 <- ggplot(data = unemp, aes(x = Time, y = change, color = change)) +
   geom_line(size = 1.0) +
   geom_hline(yintercept = 0, color = "black", size = 1.0) +
-  theme_flynn +
+  theme_flynn() +
   theme(text = element_text(size = 18)) +
   scale_x_date(breaks = seq(as.Date("1930-01-01"), as.Date("1942-01-01"), "2 years"), limits = c(as.Date("1930-01-01"), as.Date("1942-01-01")), date_labels = "%Y %b") +
   guides(color = FALSE) +
