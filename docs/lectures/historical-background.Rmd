@@ -1337,7 +1337,8 @@ class: center, middle
 
 .pull-left[
 <fig>
-<img src="../images/henry-cabot-lodge.jpg" style="width:60%; top:180px;">
+<img src="../images/henry-cabot-lodge.jpg" style="width:60%; top:80px;">
+<br>
 <br>
 <br>
 <br>
@@ -1349,7 +1350,8 @@ Henry Cabot Lodge
 
 .pull-right[
 <fig>
-<img src="../images/henry-stimson-young.jpg" style="width:60%; top:180px;">
+<img src="../images/henry-stimson-young.jpg" style="width:60%; top:80px;">
+<br>
 <br>
 <br>
 <br>
