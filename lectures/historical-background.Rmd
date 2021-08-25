@@ -205,6 +205,19 @@ class: left, top
 6. How does popular historical memory of these earlier time periods shape views on policy today?
 
 
+---
+class: left, top
+
+# Why do we care?
+
+1. Try to obtain a basic level of descriptive accuracy
+
+2. Find out if reality matches our basic assumption
+
+3. Identify, or rule out, potential causal factors
+
+
+
 
 ---
 class: center, middle, inverse
@@ -1324,7 +1337,7 @@ class: center, middle
 
 .pull-left[
 <fig>
-<img src="../images/henry-cabot-lodge.jpg" style="width:60%; top:80px;">
+<img src="../images/henry-cabot-lodge.jpg" style="width:60%; top:180px;">
 <br>
 <br>
 <br>
@@ -1336,7 +1349,7 @@ Henry Cabot Lodge
 
 .pull-right[
 <fig>
-<img src="../images/henry-stimson-young.jpg" style="width:60%; top:80px;">
+<img src="../images/henry-stimson-young.jpg" style="width:60%; top:180px;">
 <br>
 <br>
 <br>
