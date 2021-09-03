@@ -14,3 +14,5 @@ This page contains lectures delievered throughout the semester. You can click on
 3. [The Cold War in International Affairs](lectures/cold-war-international.html)
 
 4. [The Cold War in Domestic Politics](lectures/cold-war-domestic.html)
+
+5. [The Policymaking Process](lectures/policymaking.html)
