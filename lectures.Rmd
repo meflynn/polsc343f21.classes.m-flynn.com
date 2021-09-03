@@ -9,4 +9,6 @@ This page contains lectures delievered throughout the semester. You can click on
 
 1. [Course Introduction](lectures/introduction.html)
 
-1. [Historical Background](lectures/historical-background.html)
+2. [Historical Background](lectures/historical-background.html)
+
+3. [The Cold War in International Affairs](lectures/cold-war-international.html)
