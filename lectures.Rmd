@@ -16,3 +16,11 @@ This page contains lectures delievered throughout the semester. You can click on
 4. [The Cold War in Domestic Politics](lectures/cold-war-domestic.html)
 
 5. [The Policymaking Process](lectures/policymaking.html)
+
+6. [Congress and the Presidency](lectures/congress-and-presidency.html)
+
+7. [Bureaucracy and the State Department](lectures/bureaucracy.html)
+
+8. [The Defense Department and the Military](lectures/defense-military.html)
+
+9. [The Use of Military Force](lectures/military-force.html)
