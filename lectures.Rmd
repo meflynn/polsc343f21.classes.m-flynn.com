@@ -24,3 +24,5 @@ This page contains lectures delievered throughout the semester. You can click on
 8. [The Defense Department and the Military](lectures/defense-military.html)
 
 9. [The Use of Military Force](lectures/military-force.html)
+
+10. [Military Deployments](lectures/military-deployents.html)
