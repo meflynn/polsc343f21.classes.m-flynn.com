@@ -25,4 +25,8 @@ This page contains lectures delievered throughout the semester. You can click on
 
 9. [The Use of Military Force](lectures/military-force.html)
 
-10. [Military Deployments](lectures/military-deployents.html)
+10. [Military Alliances](lectures/alliances.html)
+
+11. [Military Deployments](lectures/military-deployments.html)
+
+12. [Trade and Investment](lectures/trade-investment.html)
