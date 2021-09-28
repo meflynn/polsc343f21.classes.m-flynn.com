@@ -412,7 +412,16 @@ ggplot(dfr, aes(x = day, y = reorder(week, -week), fill = comment)) +
 
 
 
-## `r advdate(mon, 6)`: The Bureaucracy / The State Department
+## `r advdate(mon, 6)`: The Policymaking Process
+
+### Readings and Assignments:
+
+- Read @marsh2014
+- Read @miller2016
+
+
+
+## `r advdate(mon, 7)`: The Bureaucracy / The State Department
 
 ### Readings and Assignments:
 
@@ -421,20 +430,11 @@ ggplot(dfr, aes(x = day, y = reorder(week, -week), fill = comment)) +
 
 
 
-## `r advdate(mon, 7)`: The Defense Department and the Military
+## `r advdate(mon, 8)`: The Defense Department and the Military
 
 ### Readings and Assignments:
 
 - Read @brooks2016
-
-
-
-## `r advdate(mon, 8)`: The Policymaking Process
-
-### Readings and Assignments:
-
-- Read @marsh2014
-- Read @miller2016
 
 
 
