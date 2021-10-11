@@ -548,17 +548,17 @@ text_2018_2 <- text_2018_2[5:35] %>%
   read_fwf(fwf_empty(.))
 colnames(text_2018_2)[1] <- "Grade"
 colnames(text_2018_2)[2] <- "Army"
-colnames(text_2018_2)[3] <- "Navy"
+colnames(text_2018_2)[4] <- "Navy"
 colnames(text_2018_2)[5] <- "Marine Corps"
 colnames(text_2018_2)[7] <- "Air Force"
 
 
 data.grade <- text_2018_2 %>% 
-  subset(select = c(1,2,3,5,7)) %>% 
-  subset(!is.na(Grade)) %>% 
-  subset(!is.na(Army)) %>% 
-  subset(Grade != "TOTAL ENLISTED" & Grade != "TOTAL OFFICER") %>% 
-  mutate(Grade = factor(Grade, Grade)) %>% 
+  dplyr::select(c(1,2,4,5,7)) %>% 
+  dplyr::filter(!is.na(Grade)) %>% 
+  dplyr::filter(!is.na(Army)) %>% 
+  dplyr::filter(Grade != "TOTAL ENLISTED" & Grade != "TOTAL OFFICER") %>% 
+  dplyr::mutate(Grade = factor(Grade, Grade)) %>% 
   pivot_longer(cols = c(2:5)) %>%
   mutate(value = as.numeric(gsub(",", "", value)),
          rank = as.numeric(Grade),
