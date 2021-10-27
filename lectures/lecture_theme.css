@@ -72,6 +72,10 @@ img {
     position: relative; /* Declared position allows for location changes */
 }
 
+.iframe{
+  text-align: center;
+}
+
 /*
 img {
 border: 2px solid black;

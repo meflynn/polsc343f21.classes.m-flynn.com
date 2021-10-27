@@ -45,7 +45,7 @@ theme_flynn <- function(){
       theme_linedraw(base_size = 12, base_family = "Arial") %+replace% 
         
         theme(plot.title = element_markdown(face = "bold", size = 20, hjust = 0, margin = margin(t = 0, b = 0.3, l = 0, r = 0, unit = "cm")),
-              plot.subtitle = element_markdown(size = 14, face = "italic", color = "gray50", lineheight = 0.2, hjust = 0),
+              plot.subtitle = element_markdown(size = 14, face = "italic", color = "gray50", margin = margin(t = 0, b = 0.2, l = 0, r = 0, unit = "cm"), hjust = 0),
               plot.caption = element_markdown(face = "italic", size = 8, hjust = 0, lineheight = 0.5), 
               strip.background = element_rect(fill = "gray80", color = "black"),
               strip.text = element_markdown(color = "black", face = "bold", margin = margin(t = 0.2, b = 0.2, l = 0.2, r = 0.2, unit = "cm")),
@@ -180,7 +180,7 @@ ggplot(allydataregion, aes(x = year, y = allycount, fill = region)) +
 ---
 class: center, middle
 
-<img src="../../../media/alliance-model-1.png">
+<img src="../images/alliance-model-1.png">
 
 
 ???
@@ -255,7 +255,7 @@ ggplot(fat.data, aes(x = Year, y = deaths, fill = country)) +
 
 # Notes
 
-- Example of burden sharing in AFghanistan and comparison case of Iraq
+- Example of burden sharing in Afghanistan and comparison case of Iraq
 - In Afghanistan US endured majority of casualties, but coalition partners also took on a sizeable share of casualties
 - In Iraq the US went in with relatively few partner states dedicated to combat operations
 - Note this doesn't include other areas of burden sharing like financial support
@@ -320,7 +320,7 @@ To right: President Trump at a NATO summit with other alliance member leaders in
 ]
 
 .pull-right[
-<img src="../../../media/trump-nato-summit.jpg" style="height:270px; width:400px;">
+<img src="../images/trump-nato-summit.jpg" style="height:270px; width:400px;">
 ]
 
 
@@ -413,7 +413,7 @@ To right: General Tod Wolters, Commander US European Command, Supreme Allied Com
 
 
 .pull-right[
-<img src="../../../media/saceur.jpg" style="width:300px; height:400px;">
+<img src="../images/saceur.jpg" style="width:300px; height:400px;">
 ]
 
 
@@ -455,7 +455,7 @@ To right: Lord Hastings Lionel Ismay, first Secretary General of NATO
 ]
 
 .pull-right[
-<img src="../../../media/lord-ismay.jpg" style="width:300px; height:400px; left:75px;">
+<img src="../images/lord-ismay.jpg" style="width:300px; height:400px; left:75px;">
 ]
 
 
@@ -535,7 +535,7 @@ To right: President Gerald Ford with South Korean President Park Chung-hee in Se
 ]
 
 .pull-right[
-<img src="../../../media/ford-park-picture.jpg" style="width:400px; height:300px">
+<img src="../images/ford-park-picture.jpg" style="width:400px; height:300px">
 ]
 
 
@@ -621,26 +621,26 @@ class: left, top
 ---
 class: center, middle
 
-<img src="../../../media/guns-v-butter-1.png">
+<img src="../images/guns-v-butter-1.png">
 
 
 ---
 class: center, middle
 
-<img src="../../../media/guns-v-butter-2.png">
+<img src="../images/guns-v-butter-2.png">
 
 
 ---
 class: center, middle
 
-<img src="../../../media/guns-v-butter-3.png">
+<img src="../images/guns-v-butter-3.png">
 
 
 
 ---
 class: center, middle
 
-<img src="../../../media/allies-hub-and-spoke.png">
+<img src="../images/allies-hub-and-spoke.png">
 
 
 
@@ -669,7 +669,7 @@ Indirect relationships also matter
 ---
 class: center, middle
 
-<img src="../../../media/allies-networked.png">
+<img src="../images/allies-networked.png">
 
 
 ???
