@@ -470,22 +470,12 @@ ggplot(dfr, aes(x = day, y = reorder(week, -week), fill = comment)) +
 - Read @goldstein2014
 
 
-## `r advdate(mon, 13)`: Human Rights Issues
 
-### Readings and Assignments:
-
-- Read @Power2001 
+## `r advdate(mon, 13)`: Trade, Immigration, Finance, and Monetary Policy (cont.)
 
 
-## `r advdate(mon, 14)`: Multilateralism and global governance
 
-### Readings and Assignments:
-
-- @milner2013
-- Read @schultz2017
-
-
-## `r advdate(mon, 15)`: Thanksgiving Break (No Class)
+## `r advdate(mon, 14)`: Thanksgiving Break (No Class)
 
 ### Readings and Assignments:
 
@@ -495,9 +485,24 @@ ggplot(dfr, aes(x = day, y = reorder(week, -week), fill = comment)) +
 4. Take a good nap
 
 
-## `r advdate(mon, 16)`: Foreign Policy in the Age of COVID-19 
+## `r advdate(mon, 15)`: Human Rights Issues
 
 ### Readings and Assignments:
- 
+
+- Read @Power2001 
+
+
+## `r advdate(mon, 16)`: Multilateralism and global governance
+
+### Readings and Assignments:
+
+- Read @milner2013
+- Read @schultz2017
 - Read @busby2020 
+
+
+
+
+
+ 
 
