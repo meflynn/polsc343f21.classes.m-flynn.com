@@ -12,6 +12,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      math: true
       ratio: 16:9
       titleSlideClass: [left, middle, inverse]
 ---
@@ -36,6 +37,7 @@ library(RColorBrewer)
 knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.align="center", echo=FALSE, warning=FALSE, error=FALSE, message=FALSE, dpi=400) 
 
 
+
 theme_flynn <- function(){ 
   
       theme_minimal(base_size = 12, base_family = "Arial") %+replace% 
@@ -53,17 +55,19 @@ theme_flynn <- function(){
               legend.title = element_text(face = "bold", hjust = 0))
 }
 
-
 ```
 
 # Lecture Overview
 
+1. Terminology
 
-1. Historical Background
+2. Historical Background
 
-2. Why do these topics matter?
+3. Why do these topics matter?
 
-3. Trade, immigration, investment, and monetary policy as foreign policy tools.
+4. Trade, immigration, investment, and monetary policy as foreign policy tools.
+
+
 
 
 
@@ -88,8 +92,74 @@ class: top, left
 
 
 
+
 ---
 class: center, middle, inverse
+
+# Terminology
+
+
+
+---
+class: left, top
+
+# Terminology
+
+### Trade
+
+Trade: The flow of goods and services between countries
+
+Imports: Goods and services that are consumed within a referent country but produced in another.
+
+Exports: Goods and services that are produced within a referent country for consumption in another.
+
+Aggregation: We can talk about how to group different businesses or products (specific items, technologies, industries, sectors, etc.)
+
+???
+
+# Notes
+
+Example of aggregation: North American Industry Classification System Item #311111: Dog and cat food (e.g., canned, dry, frozen, semimoist), manufacturing.
+
+Another: 311330 Cocoa, powdered, mixed with other ingredients, made from purchased chocolate
+
+
+
+
+---
+class: left, top
+
+# Terminology
+
+### Finance and Monetary Policy
+
+Finance: Refers to the flow of capital (cash) within and across borders
+  
+  - Portfolio Investment
+  - Sovereign Lending
+  - Foreign Direct Investment (FDI)
+
+Monetary Policy: Refers to the supply and valuation of currenty
+
+  - Interest rates
+  - Money supply
+
+
+
+
+
+
+
+
+---
+class: center, middle, inverse
+
+# Historical Background
+
+
+
+---
+class: left, top
 
 # Historical Background
 
@@ -140,7 +210,6 @@ class:  left, top
 
 # Historical Background
 
-
 Bretton Woods System
 
 - Partly a reaction to pre-World War II move to autarky
@@ -151,7 +220,11 @@ Bretton Woods System
   - International Monetary Fund (IMF)
   - International Bank for Reconstruction and Development (World Bank)
   
-  
+???
+# Notes
+- GATT focuses on promoting free trade and lowering tariff barriers
+- IMF focuses on short-term imbalances in payments between states
+- World Bank promotes development in less developed countries
   
   
 ---
@@ -193,13 +266,13 @@ us.trade.gdp <- trade.national %>%
   mutate(exports.gdp = ((exports.con/realgdp)),
         imports.gdp = ((imports.con/realgdp))) %>% 
   as.data.frame() %>% 
-  rename("Exports"= "exports.gdp", "Imports" = "imports.gdp", "Deficit" = "deficit") %>% 
-  pivot_longer(cols = c("Exports", "Imports", "exports.con", "imports.con", "Deficit", "realgdp"))
+  rename("Exports" = "exports.gdp", "Imports" = "imports.gdp", "Exports (Constant)" = "exports.con", "Imports (Constant)" = "imports.con", "Deficit" = "deficit") %>% 
+  pivot_longer(cols = c("Exports", "Imports", "Exports (Constant)", "Imports (Constant)", "Deficit", "realgdp"))
 
 
 
 # US exports and imports over time
-ggplot(data = subset(us.trade.gdp, name == "exports.con" | name == "imports.con"), aes(x = year, y = value/1000, group = name, colour = name)) +
+ggplot(data = subset(us.trade.gdp, name == "Exports (Constant)" | name == "Imports (Constant)"), aes(x = year, y = value/1000, group = name, colour = name)) +
   geom_line(size = 2) +
   theme_flynn() +
   labs(x = "Year",
@@ -209,7 +282,7 @@ ggplot(data = subset(us.trade.gdp, name == "exports.con" | name == "imports.con"
        caption = "Data obtained from the Correlates of War Data's National Trade Data (v4.0)") +
   scale_y_continuous(labels = dollar) +
   scale_x_continuous(breaks = seq(1950,2015,5)) +
-  scale_color_brewer(palette = "Set1", guide_colourbar(title = "Group"))
+  viridis::scale_color_viridis(option = "magma", discrete = TRUE, guide_colourbar(title = "Group"))
 
 
 ```
@@ -271,6 +344,13 @@ Theoretical
   
   - Trade has other beneficial effects (e.g. it promotes peaceful relations between states)
   
+???
+# Notes
+
+- Historically nations very wary of trade as it might enrich adversaries
+- Adam Smith and David Ricardo came along and talked about the benefits of specialization and free markets.
+- We see greater moves towards free trade throughout the 1800s, mostly as a response to British leadership and technological change
+- Ideas gain steam in 20th century through Woodrow Wilson's 14 Points
   
   
 ---
@@ -462,6 +542,31 @@ ggplot(data = subset(growth.comparison, name == "Deficit"), aes(x = year, y = va
 
 
 ```
+
+
+
+---
+class: left, top
+
+# Trade as a Policy Instrument
+
+Does this mean trade is hurting your economy?
+
+--
+
+No!
+
+--
+
+Let's look at how GDP is calculated:
+
+$$GDP_{it} = Consumption_{it} + Investment_{it} + Government_{it} + (Exports_{it} - Imports_{it})$$
+  
+
+
+
+
+
 
 
 
@@ -669,7 +774,7 @@ More recent example: Manufacturing
 
 - Heavily tied into American image of production and the importance of making things
 
-- Early Trump economic policies focused on "reviving" US manufacturing, but what it in need of resuscitation?
+- Early Trump economic policies focused on "reviving" US manufacturing, but was it even in need of resuscitation?
 
 
 ---
@@ -718,7 +823,7 @@ ggplot(data = man.index) +
   labs(x = "Date",
        y = "Index (2012 = 100)",
        title = "US Manufacturing Production Index, 1972-2019",
-       subtitle = "Overlal manufacturing production has generally risen over time",
+       subtitle = "Overlall manufacturing production has generally risen over time",
        caption = "Data obtained from FRED data series IPMAN")
 
 
