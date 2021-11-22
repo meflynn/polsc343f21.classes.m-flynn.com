@@ -30,3 +30,5 @@ This page contains lectures delievered throughout the semester. You can click on
 11. [Military Deployments](lectures/military-deployments.html)
 
 12. [Trade and Investment](lectures/trade-investment.html)
+
+13. [Human Rights](lectures/human-rights.html)

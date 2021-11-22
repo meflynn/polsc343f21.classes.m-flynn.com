@@ -1,50 +1,28 @@
----
-title: "US Foreign Policy"
-subtitle: "Human Rights in US Foreign Policy"
-author: "Michael E. Flynn"
-institute: "Kansas State University"
-date: "Updated: `r Sys.Date()`"
-output:
-  xaringan::moon_reader:
-    css: ["default", "../../../styles/lecture_theme.css"]
-    lib_dir: libs
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
-      ratio: 16:9
-      titleSlideClass: [left, middle, inverse]
----
-```{r setup, include = FALSE, echo = FALSE}
-library(tidyverse)
-library(tidyquant)
-library(plotly)
-library(pdftables)
-library(pdftools)
-library(scales)
-library(here)
-library(Hmisc)
-library(kableExtra)
-library(knitr)
-library(lubridate)
-library(rgdal) # used to read world map data
-library(rgeos) 
-library(rvest)
-library(maptools)
-library(ggmap)
-library(colorRamps)
-library(RColorBrewer)
-knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.align="center", echo=FALSE, warning=FALSE, error=FALSE, message=FALSE, dpi=400) 
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>US Foreign Policy</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Michael E. Flynn" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="lecture_theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, middle, inverse, title-slide
 
-# Plotly font
-t <- list(family = "arial",
-          size = 18)
+# US Foreign Policy
+## Human Rights in US Foreign Policy
+### Michael E. Flynn
+### Kansas State University
+### Updated: 2021-11-21
 
-theme_flynn <- theme_linedraw() + theme(text = element_text(size = 16),
-                                        plot.title = element_text(face = "bold", size = 20),
-                                        plot.subtitle = element_text(size = 16),
-                                        plot.caption = element_text(face = "italic", size = 8))
-```
+---
+
+
 
 # Lecture Overview
 
@@ -118,7 +96,7 @@ United Nations Universal Declaration of Human Rights
 ]
 
 .pull-right[
-<img src="../../../media/eleanor-roosevelt.jpg" style="width: 80%; height: 80%;">
+&lt;img src="../images/eleanor-roosevelt.jpg" style="width: 80%; height: 80%;"&gt;
 ]
 
 
@@ -204,27 +182,95 @@ class: left, top
 ---
 class: center, middle
 
-```{r human rights table}
-
-agreements <- tibble(`Category` = c("International Bill of Human Rights", "Prevention of discrimination on the basis of race, religion, or belief; and protection of minorities", "Women's Rights", "Slavery", "Torture and Ill-treatment", "Children's rights", "Freedom of association", "Employment and forced labor", "Education", "Refugees and asylum", "Nationality and statelessness", "War crimes and genocide", "Law of armed conflict", "Terrorism and human rights", "Total"),
-                     `Total Agreements` = c(4, 1, 5, 4, 4, 3, 2, 7, 1, 2, 2, 3, 6, 5, 49),
-                     `Total Ratified` = c(1, 1, 0, 1, 1, 2, 0, 1, 0, 0, 0, 1, 4, 5, 17))
-
-  kable(agreements,
-        "html",
-        align = c("l", "c", "c"),
-        caption = "US Human Rights Treaty Commitments by Topic Area") %>% 
-    kable_styling(full_width = TRUE, font_size = 11) %>% 
-    column_spec(1, width = "10cm") %>% 
-    row_spec(0, bold = TRUE, background = "#512888", color = "white") %>% 
-    row_spec(14, extra_css = "border-bottom: 1px solid") %>% 
-    row_spec(15, bold = TRUE) %>% 
-    footnote(general = "Data obtained from University of Minnesota Human Rights Library http://hrlibrary.umn.edu/research/ratification-USA.html",
-           footnote_as_chunk = TRUE, title_format = c("italic"))
-
-
-
-```
+&lt;table class="table" style="font-size: 11px; margin-left: auto; margin-right: auto;border-bottom: 0;"&gt;
+&lt;caption style="font-size: initial !important;"&gt;US Human Rights Treaty Commitments by Topic Area&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;font-weight: bold;color: white !important;background-color: #512888 !important;"&gt; Category &lt;/th&gt;
+   &lt;th style="text-align:center;font-weight: bold;color: white !important;background-color: #512888 !important;"&gt; Total Agreements &lt;/th&gt;
+   &lt;th style="text-align:center;font-weight: bold;color: white !important;background-color: #512888 !important;"&gt; Total Ratified &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; International Bill of Human Rights &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; Prevention of discrimination on the basis of race, religion, or belief; and protection of minorities &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; Women's Rights &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; Slavery &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; Torture and Ill-treatment &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; Children's rights &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; Freedom of association &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; Employment and forced labor &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; Education &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; Refugees and asylum &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; Nationality and statelessness &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; War crimes and genocide &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; "&gt; Law of armed conflict &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; border-bottom: 1px solid"&gt; Terrorism and human rights &lt;/td&gt;
+   &lt;td style="text-align:center;border-bottom: 1px solid"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;border-bottom: 1px solid"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;width: 10cm; font-weight: bold;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;"&gt; 49 &lt;/td&gt;
+   &lt;td style="text-align:center;font-weight: bold;"&gt; 17 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;&lt;tr&gt;&lt;td style="padding: 0; " colspan="100%"&gt;
+&lt;span style="font-style: italic;"&gt;Note: &lt;/span&gt; &lt;sup&gt;&lt;/sup&gt; Data obtained from University of Minnesota Human Rights Library http://hrlibrary.umn.edu/research/ratification-USA.html&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;
 
 
 
@@ -256,7 +302,7 @@ Domestic roadblocks to human rights
 ]
 
 .pull-right[
-<img src="../../../media/james-byrnes.jpg" style="width:60%; left:30px;">
+&lt;img src="../images/james-byrnes.jpg" style="width:60%; left:30px;"&gt;
 ]
 
 
@@ -300,7 +346,7 @@ Bricker Amendment
 
 
 .pull-right[
-<img src="../../../media/john-bricker.jpg" style="width:350px; height:425px;">
+&lt;img src="../images/john-bricker.jpg" style="width:350px; height:425px;"&gt;
 ]
 
 
@@ -309,7 +355,7 @@ Bricker Amendment
 ---
 class: center, middle
 
-<img src="../../../../Projects/Republican opposition to multilateralism/Figures/figure-bricker-votes.png">
+&lt;img src="../../../../Projects/Republican opposition to multilateralism/Figures/figure-bricker-votes.png"&gt;
 
 
 
@@ -320,7 +366,7 @@ class: left, top
 
 Humphrey-Cranston Amendment (Section 502B of the
 1974 Foreign Assistance Act):
-> Except under extraordinary circumstances no security
+&gt; Except under extraordinary circumstances no security
 assistance may be provided to any country the
 government of which engages in a consistent pattern
 of gross violations of internationally recognized human
@@ -341,7 +387,7 @@ class: left, top
 
 Harkin Amendment (Section 116 of the Foreign
 Assistance Act of 1974):
-> No assistance may be provided under this part to
+&gt; No assistance may be provided under this part to
 the government of any country which engages in
 consistent pattern of gross violations of
 internationally recognized human rights, including
@@ -378,7 +424,7 @@ Rights and Humanitarian Affairs
 ]
 
 .pull-right[
-<img src="../../../media/james-m-wilson.jpg" style="height:400px; width: 300px;">
+&lt;img src="../images/james-m-wilson.jpg" style="height:400px; width: 300px;"&gt;
 ]
 
 
@@ -410,7 +456,7 @@ Rights
 ]
 
 .pull-right[
-<img src="../../../media/maria-otero.jpg" style="height:400px; width: 300px;">
+&lt;img src="../images/maria-otero.jpg" style="height:400px; width: 300px;"&gt;
 ]
 
 
@@ -467,62 +513,7 @@ they were taken and under what circumstances.
 ---
 class: center, middle
 
-```{r ciri-physical-integrity-scores}
-
-library(patchwork)
-
-hr.score <- read_csv("../../../Data Files/latent-human-rights-scores/HumanRightsProtectionScores_v3.01.csv") %>% 
-  filter(COW == 2)
-
-torture <- ggplot(hr.score, aes(x = YEAR, y = TORT)) +
-  geom_step() +
-  geom_point(color = "dodgerblue1", size = 2) +
-  scale_x_continuous(breaks = seq(1980, 2015, 5), limits = c(1980, 2015)) +
-  scale_y_continuous(breaks = seq(0, 2, 1), limits = c(0, 2)) +
-  theme_flynn +
-  labs(x = "Year",
-       y = "Score",
-       title = "Torture")
-
-prison <- ggplot(hr.score, aes(x = YEAR, y = POLPRIS)) +
-  geom_step() +
-  geom_point(color = "dodgerblue1", size = 2) +
-  scale_x_continuous(breaks = seq(1980, 2015, 5), limits = c(1980, 2015)) +
-  scale_y_continuous(breaks = seq(0, 2, 1), limits = c(0, 2)) +
-  theme_flynn +
-  labs(x = "Year",
-       y = "Score",
-       title = "Political Imprisonment")
-
-kill <- ggplot(hr.score, aes(x = YEAR, y = KILL)) +
-  geom_step() +
-  geom_point(color = "dodgerblue1", size = 2) +
-  scale_x_continuous(breaks = seq(1980, 2015, 5), limits = c(1980, 2015)) +
-  scale_y_continuous(breaks = seq(0, 2, 1), limits = c(0, 2)) +
-  theme_flynn +
-  labs(x = "Year",
-       y = "Score",
-       title = "Extrajudicial Killings")
-
-disap <- ggplot(hr.score, aes(x = YEAR, y = DISAP)) +
-  geom_step() +
-  geom_point(color = "dodgerblue1", size = 2) +
-  scale_x_continuous(breaks = seq(1980, 2015, 5), limits = c(1980, 2015)) +
-  scale_y_continuous(breaks = seq(0, 2, 1), limits = c(0, 2)) +
-  theme_flynn +
-  labs(x = "Year",
-       y = "Score",
-       title = "Disappearances")
-
-
-
-plots <- (torture | prison) / (kill | disap)
-
-plots + plot_annotation(title = "Physical Integrity Rights Measures for the United States, 1980-2012",
-                        theme = theme(plot.title = element_text(size = 22, face = "bold"),
-                                      plot.title.position = "plot"))
-
-```
+&lt;img src="human-rights_files/figure-html/ciri-physical-integrity-scores-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -532,19 +523,7 @@ plots + plot_annotation(title = "Physical Integrity Rights Measures for the Unit
 ---
 class: center, middle
 
-```{r latent scores}
-
-ggplot(hr.score, aes(x = YEAR, y = theta_mean)) +
-  geom_line() +
-  geom_ribbon(aes(ymin = theta_mean - 2*theta_sd, ymax = theta_mean + 2*theta_sd), alpha= 0.5, fill = "dodgerblue1") +
-  scale_x_continuous(breaks = seq(1950, 2020, 10)) +
-  theme_flynn +
-  labs(x = "Year",
-       y = "Score",
-       title = "Latent Human Rights Score for United States, 1946-2017",
-       caption = "Latent human rights score data: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/TADPGE")
-
-```
+&lt;img src="human-rights_files/figure-html/latent scores-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -552,29 +531,7 @@ ggplot(hr.score, aes(x = YEAR, y = theta_mean)) +
 ---
 class: left, top
 
-```{r US Comparison}
-
-countries <- c(2, 20, 200, 220, 255, 325, 365, 710, 740, 732)
-
-hr.score <- read_csv("../../../Data Files/latent-human-rights-scores/HumanRightsProtectionScores_v3.01.csv") %>% 
-  filter(COW %in% countries) %>% 
-  mutate(country = factor(COW, levels = c(2, 20, 200, 220, 255, 325, 365, 710, 740, 732),
-                          labels = c("USA", "Canada", "UK", "France", "Germany", "Italy", "Russia/USSR", "China", "Japan", "South Korea")))
-
-ggplot(hr.score, aes(x = YEAR, y = theta_mean, color = factor(country), size = country, group = country)) +
-  geom_line(alpha = 0.8) +
-  scale_color_brewer(palette = "Set3", name = "Country") +
-  scale_size_manual(name = "Country", values = c(5, 1, 1, 1, 1, 1, 1, 1, 1, 1), 
-                    labels = c("USA", "Canada" ,"UK", "France", "Germany", "Italy", "Russia/USSR", "China", "Japan", "South Korea")) +
-  theme_flynn +
-  labs(x = "Year",
-       y = "Score",
-       color = "Country",
-       size = "Country",
-       title = "United States scores compared to other states of interest",
-       caption = "Latent human rights score data: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/TADPGE")
-
-```
+&lt;img src="human-rights_files/figure-html/US Comparison-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -663,7 +620,7 @@ Anwar al-Awlaki
 ]
 
 .pull-right[
-<img src="../../../media/anwar-al-awlaki.jpg" style="top:-15px; height: 450px; width:320px;">
+&lt;img src="../images/anwar-al-awlaki.jpg" style="top:-15px; height: 450px; width:320px;"&gt;
 ]
 
 
@@ -694,7 +651,7 @@ To right: August 2014 protests in Libya after Libyan Parliament voted to request
 ]
 
 .pull-right[
-<img src="../../../media/libya-protest.jpg" style="width:100%; left:30px;">
+&lt;img src="../images/libya-protest.jpg" style="width:100%; left:30px;"&gt;
 ]
 
 
@@ -726,12 +683,12 @@ class: left, top
 So what do these terms mean?
 
 **Refugee** According to 8 U.S. Code § 1101(a)(42)(A)
-> Any person who is outside their home country and who is unable or unwilling to return to that country because of persecution or a well-founded fear of persecution on account of race, religion, nationality, membership in a particular social group, or political opinion. 
+&gt; Any person who is outside their home country and who is unable or unwilling to return to that country because of persecution or a well-founded fear of persecution on account of race, religion, nationality, membership in a particular social group, or political opinion. 
 
 
 **Asylum** 
 
->Meet criteria for refugee status, but apply after they are in the United States, or at a port of entry.
+&gt;Meet criteria for refugee status, but apply after they are in the United States, or at a port of entry.
 
 
 
@@ -750,25 +707,7 @@ Criteria for asylum and refugee admissions is the same, but there is no cap on a
 ---
 class: center, middle
 
-```{r refugee ceiling}
-# Refugee ceiling and admissions
-refugee.ceiling <- readxl::read_xls(here("../../../Data Files/US Government Files/state-department/refugee-admissions.xls"), skip = 9) %>% 
-  select(`Fiscal Year`, `Ceiling`, `to the U.S.`) %>% 
-  mutate(year = seq(2008, 2018, 1),
-         admitted = `to the U.S.`,
-         Ceiling = ifelse(is.na(Ceiling), 50000, Ceiling))
-
-ggplot(data = refugee.ceiling) +
-  geom_bar(aes(x = year, y = admitted), stat = "identity", fill = "dodgerblue1", color = "black", size = .1, alpha = .8) +
-  geom_step(aes(x = year, y = Ceiling), color = "maroon", size = 2, na.rm = TRUE,  direction = "mid") +
-  theme_flynn +
-  scale_x_continuous(breaks = seq(2008, 2018, 1)) +
-  labs(x = "Year",
-       title = "Refugee ceiling and admissions, 2008-2018",
-       caption = "Data obtained from US Department of State Figures\nhttp://www.wrapsnet.org/s/Graph-Refugee-Admissions-FY2018_06_30.xls\nNote: 2017 Ceiling initially set by Obama administration and later reduced by Trump administration.")
-  
-
-```
+&lt;img src="human-rights_files/figure-html/refugee ceiling-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -778,85 +717,14 @@ ggplot(data = refugee.ceiling) +
 ---
 class: center, middle
 
-```{r refugee and asylum grants}
-
-# Refugees and asylum seekers
-text_asylum <- pdf_text(here("../../../Data Files/US Government Files/state-department/refugee-report.pdf"))
-# table values
-text_asylum_2 <- text_asylum[9] %>% # Select page with table
-  read_lines(skip = 2, skip_empty_rows = TRUE, n_max = 38)  %>% 
-  grep('\\s', ., value = TRUE) %>% 
-  paste(collapse = '\n') %>% 
-  read_fwf(fwf_empty(.)) %>% 
-  plyr::rename(c("X1" = "year", "X2" = "ref.arrivals", "X3" = "asylum.grants", "X4" = "totals")) %>% 
-  pivot_longer(cols = c("ref.arrivals", "asylum.grants", "totals")) %>% 
-  mutate(name = factor(name, levels = c("ref.arrivals", "asylum.grants", "totals"), labels = c("Refugee Admissions", "Asylum Grants", "Totals")))
-
-ggplot(data = text_asylum_2 %>% filter(name != "Totals"), aes(x = year, y = value, group = name, fill = name)) +
-  geom_bar(stat = "identity", color = "black", size = .1, alpha = .8) +
-  theme_flynn +
-  scale_x_continuous(breaks = seq(1980, 2015, 5), limits = c(1980, 2017)) +
-  scale_y_continuous(labels = comma_format()) +
-  scale_fill_brewer(palette = "Set1") +
-  labs(x = "Year",
-       y = "Count",
-       title = "Refugee admissions and asylum grants, 1980-2017",
-       fill = "Category",
-       caption = "Data obtained from State Department report to Congress: \"Proposed refugee admissions for fiscal year 2019\"\nhttps://www.state.gov/documents/organization/286401.pdf")
-
-
-
-```
+&lt;img src="human-rights_files/figure-html/refugee and asylum grants-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
 ---
 class: center, middle
 
-```{r refugee resettlement by country}
-
-# Refugees by country of origin
-text_asylum <- pdf_text(here("../../../Data Files/US Government Files/state-department/refugee-report.pdf"))
-# table values
-text_asylum_3_1 <- text_asylum[25] %>% # Select page with table
-  read_lines(skip = 4, skip_empty_rows = TRUE, n_max = 30)  %>% 
-  grep('\\s', ., value = TRUE) %>% 
-  paste(collapse = '\n') %>% 
-  read_fwf(fwf_empty(.)) %>% 
-  select(c("X1","X2","X3")) %>% 
-  plyr::rename(c("X1" = "country", "X2" = "count", "X3" = "percent"))
-
-text_asylum_3_2 <- text_asylum[26] %>% # Select page with table
-  read_lines(skip = 0, skip_empty_rows = TRUE, n_max = 35)  %>% 
-  grep('\\s', ., value = TRUE) %>% 
-  paste(collapse = '\n') %>% 
-  read_fwf(fwf_empty(.)) %>% 
-  select(c("X1","X2","X3")) %>% 
-  plyr::rename(c("X1" = "country", "X2" = "count", "X3" = "percent"))
-
-text_asylum_3_3 <- text_asylum[27] %>% # Select page with table
-  read_lines(skip = 0, skip_empty_rows = TRUE, n_max = 12)  %>% 
-  grep('\\s', ., value = TRUE) %>% 
-  paste(collapse = '\n') %>% 
-  read_fwf(fwf_empty(.)) %>% 
-  select(c("X1","X2","X3")) %>% 
-  plyr::rename(c("X1" = "country", "X2" = "count", "X3" = "percent"))
-
-refugee.combined <- rbind(text_asylum_3_1, text_asylum_3_2, text_asylum_3_3)
-
-ggplot(data = refugee.combined, aes(x = reorder(country, count), y = count)) +
-  geom_bar(stat = "identity", fill = "deepskyblue", colour = "black", size = .1) +
-  coord_flip() +
-  theme_flynn +
-  theme(axis.text.y = element_text(size = 6)) +
-  scale_y_continuous(breaks = seq(0, 10000, 2000), limits = c(0, 10000), labels = comma_format()) +
-  labs(x = "",
-       y = "Count",
-       title = "US refugee resettlement by country of origin, 2017", 
-       caption = "Data obtained from State Department report to Congress: \"Proposed refugee admissions for fiscal year 2019\"\nhttps://www.state.gov/documents/organization/286401.pdf")
-
-
-```
+&lt;img src="human-rights_files/figure-html/refugee resettlement by country-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -885,141 +753,14 @@ Southwest border
 ---
 class: center, middle
 
-```{r }
-
-# Monthly apprehension data
-text_ill_mon <- pdf_text(here("../../../Data Files/US Government Files/customs-border-patrol/bp-total-monthly-apps-sector-area-fy2018.pdf"))
-text_ill_mon_1 <- text_ill_mon[1]
-text_ill_mon_2 <- text_ill_mon[2]
-text_ill_mon_3 <- text_ill_mon[3]
-text_ill_mon_4 <- text_ill_mon[4]
-text_ill_mon_5 <- text_ill_mon[5]
-text_ill_mon_6 <- text_ill_mon[6]
-text_ill_mon_7 <- text_ill_mon[7]
-text_ill_mon_8 <- text_ill_mon[8]
-text_ill_mon_9 <- text_ill_mon[9]
-text_ill_mon_10 <- text_ill_mon[10]
-text_ill_mon_11 <- text_ill_mon[11]
-text_ill_mon_12 <- text_ill_mon[12]
-text_ill_mon_13 <- text_ill_mon[13]
-text_ill_mon_14 <- text_ill_mon[14]
-text_ill_mon_15 <- text_ill_mon[15]
-text_ill_mon_16 <- text_ill_mon[16]
-text_ill_mon_17 <- text_ill_mon[17]
-text_ill_mon_18 <- text_ill_mon[18]
-text_ill_mon_19 <- text_ill_mon[19]
-
-ill.mon.list <- list(text_ill_mon_1, 
-                     text_ill_mon_2, 
-                     text_ill_mon_3, 
-                     text_ill_mon_4, 
-                     text_ill_mon_5, 
-                     text_ill_mon_6, 
-                     text_ill_mon_7, 
-                     text_ill_mon_8, 
-                     text_ill_mon_9, 
-                     text_ill_mon_10,
-                     text_ill_mon_11,
-                     text_ill_mon_12,
-                     text_ill_mon_13,
-                     text_ill_mon_14,
-                     text_ill_mon_15,
-                     text_ill_mon_16,
-                     text_ill_mon_17,
-                     text_ill_mon_18,
-                     text_ill_mon_19)
-
-# BOOM!
-# Adjust for fiscal year
-for(page in 1:19) {
-    df_page <- text_ill_mon[[page]] %>% 
-    read_lines(skip = 26, skip_empty_rows = TRUE, n_max = 4)  %>% 
-    grep('\\s', ., value = TRUE) %>% 
-    paste(collapse = '\n') %>% 
-    read_fwf(fwf_empty(.)) %>% 
-    dplyr::rename(c("October"= "X2",
-                   "November"  = "X3" ,
-                   "December"  = "X4" ,
-                   "January"   = "X5" ,
-                   "February"  = "X6" ,
-                   "March"     = "X7" ,
-                   "April"     = "X8" ,
-                   "May"       = "X9" ,
-                    "June"     = "X10",
-                    "July"     = "X11",
-                    "August"   = "X12",
-                    "September"= "X13" )) %>% 
-    pivot_longer(cols = (2:13)) %>% 
-    arrange(X1, name) %>% 
-    group_by(X1) %>% 
-    ungroup() %>% 
-    dplyr::rename("Location" = "X1", "month" = "name") %>% 
-    mutate(year = ifelse(month == "October" | month == "November" | month == "December", 1998+page, 1999+page))
-    
-    ill.mon.list[[page]] <- df_page
-}
-
-ill.mon.df <- plyr::rbind.fill(ill.mon.list) %>% 
-  filter(month != "X14" & Location != "Monthly Total") %>% 
-  mutate(date = as.Date(paste(year, month, 1, sep = "-"), format = "%Y-%b-%d"))
-
-# Monthly illegal apphrensions
-ggplot(data = ill.mon.df, aes(x = date, y = value, group = Location, fill = Location)) +
-  geom_area(position = "stack", stat = "identity", color = "black", size = .1, alpha = .8) +
-  theme_flynn +
-  scale_x_date(breaks = seq(as.Date("1999-10-01"), as.Date("2018-09-01"), by = "24 months"), labels = date_format("%Y-%b")) +
-  scale_y_continuous(breaks = seq(0, 220000, 20000), labels = comma_format()) +
-  scale_fill_brewer(palette = "Spectral") +
-  labs(x = "Date",
-       y = "Count",
-       title = "Monthly apprehensions by location, FY2000-FY2018",
-       caption = "Data obtained from https://www.cbp.gov/sites/default/files/assets/documents/2019-Mar/bp-total-monthly-apps-sector-area-fy2018.pdf")
-
-
-```
+&lt;img src="human-rights_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
 ---
 class: center, middle
 
-```{r overall apprehensions}
-
-# Overall apprehensions
-text_apprehensions <- pdf_text(here("../../../Data Files/US Government Files/customs-border-patrol/bp-total-apps-fy1925-fy2018.pdf"))
-
-df.apprehensions <- text_apprehensions %>% 
-  read_lines(skip = 3, skip_empty_rows = TRUE)  %>% 
-  grep('\\s', ., value = TRUE) %>% 
-  paste(collapse = '\n') %>% 
-  read_fwf(fwf_empty(.)) %>% 
-  subset(select = c(X1, X2)) %>% 
-  plyr::rename(c("X1" = "Year", "X2" = "Count")) -> df.apprehensions.1 
-  
-df.apprehensions <- text_apprehensions %>% 
-  read_lines(skip = 3, skip_empty_rows = TRUE)  %>% 
-  grep('\\s', ., value = TRUE) %>% 
-  paste(collapse = '\n') %>% 
-  read_fwf(fwf_empty(.)) %>% 
-  subset(select = c(X3, X4)) %>% 
-  plyr::rename(c("X3" = "Year", "X4" = "Count")) -> df.apprehensions.2
-
- df.apprehensions.com <- rbind(df.apprehensions.1, df.apprehensions.2)
- 
-# total illegal apprehensions by year 
-ggplot(data = df.apprehensions.com, aes(x = Year, y = Count)) +
-  geom_area(fill = "dodgerblue1", color = "black", size = .1, alpha = .8) +
-  theme_flynn +
-  scale_x_continuous(breaks = seq(1925, 2019, 10)) +
-  scale_y_continuous(breaks = seq(0, 1750000, 250000), label = comma_format()) +
-  labs(x = "Year",
-       y = "Count",
-       title = "Total apprehensions by year, 1925-2018",
-       caption = "Data obtained from US Customs and Border Protection\nhttps://www.cbp.gov/sites/default/files/assets/documents/2019-Mar/bp-total-apps-fy1925-fy2018.pdf")
-
-
-
-```
+&lt;img src="human-rights_files/figure-html/overall apprehensions-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -1029,24 +770,7 @@ ggplot(data = df.apprehensions.com, aes(x = Year, y = Count)) +
 ---
 class: center, middle
 
-```{r immigration case backlog}
-
-imm.backlog <- readxl::read_xlsx(here("../../../Data Files/syracuse-tracfed/immigration-case-backlog.xlsx"), skip = 381) %>% 
-  plyr::rename(c("All Nationalities" = "country", "855807" = "cases"))
-
-ggplot(data = subset(imm.backlog, cases>=2000), aes(x = reorder(country, cases), y = cases)) +
-  geom_bar(stat = "identity", fill = "dodgerblue1", color = "black", size = .1, alpha = .8) +
-  coord_flip() +
-  theme_flynn +
-  scale_y_continuous(breaks = seq(0, 200000, 25000), limits = c(0,200000), label = comma_format()) +
-  labs(x = "",
-       y = "Count",
-       title = "Immigration case backlog by country of origin, FY2019",
-       caption = "Only countries with backlogs exceeding 2,000 shown.\nhttps://tracfed.syr.edu/index/index.php?layer=admin&ds=immigration")
-
-
-
-```
+&lt;img src="human-rights_files/figure-html/immigration case backlog-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -1054,29 +778,7 @@ ggplot(data = subset(imm.backlog, cases>=2000), aes(x = reorder(country, cases),
 ---
 class: center, middle
 
-```{r immigration backlog histogram}
-
-# Imigration court case delay
-imm.delay <- readxl::read_xlsx(here("../../../Data Files/syracuse-tracfed/immigration-case-backlog-20201111.xlsx"))
-colnames(imm.delay)[1] <- "location"
-colnames(imm.delay)[2] <- "delay"
-
-la.value <- imm.delay$delay[imm.delay$location == "Los Angeles, California"]
-
-ggplot(data = imm.delay, aes(x = as.numeric(delay))) +
-  geom_histogram(fill = "dodgerblue1", binwidth = 30 , color = "black", size = .1, alpha = .8) +
-  annotate("segment", x = as.numeric(la.value), xend = as.numeric(la.value), y = 18, yend = 7, colour = "red", size=1.5, alpha = 1.0, arrow=arrow(length = unit(0.25, "cm"), type = "closed")) +  
-  annotate("text", x = as.numeric(la.value), y = 21, hjust = 0, size = 3, label = paste("Court location:\nLos Angeles, CA\nDelay: ", la.value, " Days")) +
-  theme_flynn +
-  scale_x_continuous(breaks = seq(0, 8000, 1000)) +
-  scale_y_continuous() +
-  labs(x = "Days",
-       y = "Count",
-       title = "Immigration case hearing average length of wait by court location, FY2020",
-       caption = "Data obtained from: https://tracfed.syr.edu/index/index.php?layer=admin&ds=immigration")
-
-
-```
+&lt;img src="human-rights_files/figure-html/immigration backlog histogram-1.png" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -1153,7 +855,7 @@ Fallout
 
 
 .pull-right[
-<img src="../../../media/immigrant-child-picture.jpg" style="height: 325px; width: 450px;">
+&lt;img src="../images/immigrant-child-picture.jpg" style="height: 325px; width: 450px;"&gt;
 ]
 
 
@@ -1164,3 +866,127 @@ Fallout
 
 - On children expelled into Mexico: https://www.nytimes.com/2020/10/30/us/migrant-children-expulsions-mexico.html
 - On number of children expelled into Mexico: https://www.nytimes.com/2020/10/21/us/migrant-children-separated.html
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
