@@ -6,7 +6,7 @@ institute: "Kansas State University"
 date: "Updated: `r Sys.Date()`"
 output:
   xaringan::moon_reader:
-    css: ["default", "../../../styles/lecture_theme.css"]
+    css: ["default", "lecture_theme.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -19,6 +19,7 @@ output:
 library(tidyverse)
 library(tidyquant)
 library(plotly)
+library(data.table)
 library(pdftables)
 library(pdftools)
 library(scales)
@@ -26,24 +27,41 @@ library(here)
 library(Hmisc)
 library(kableExtra)
 library(knitr)
+library(ggtext)
 library(lubridate)
 library(rgdal) # used to read world map data
 library(rgeos) 
 library(rvest)
 library(maptools)
 library(ggmap)
+library(patchwork)
 library(colorRamps)
 library(RColorBrewer)
+
 knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.align="center", echo=FALSE, warning=FALSE, error=FALSE, message=FALSE, dpi=400) 
 
 # Plotly font
-t <- list(family = "arial",
-          size = 18)
 
-theme_flynn <- theme_linedraw() + theme(text = element_text(size = 16),
-                                        plot.title = element_text(face = "bold", size = 20),
-                                        plot.subtitle = element_text(size = 16),
-                                        plot.caption = element_text(face = "italic", size = 8))
+basesize <- 12
+
+sysfonts::font_add_google("Oswald", family = "oswald")
+showtext::showtext_auto()
+
+theme_flynn <- function(){ 
+  
+      theme_linedraw(base_size = basesize, base_family = "oswald") %+replace% 
+        
+        theme(plot.title = element_text(face = "bold", size = basesize * 1.3, hjust = 0, margin = margin(t = 0, b = 0.3, l = 0, r = 0, unit = "cm")),
+              plot.subtitle = element_text(size = basesize),
+              plot.caption = element_text(face = "italic", size = basesize * 0.7, hjust = 1),
+              strip.background = element_rect(fill = "gray80", color = "black"),
+              strip.text = element_text(color = "black", face = "bold", margin = margin(t = 0.2, b = 0.2, l = 0.2, r = 0.2, unit = "cm")),
+              panel.grid.major = element_line(color = "gray70", size = 0.15),
+              panel.grid.minor = element_line(color = "gray90", size = 0.1),
+              plot.margin = margin(0.5, 0.5, 0.5, 0.5, unit = "cm"),
+              legend.margin=margin(t=-10, b=0, r=0, l=0),
+              legend.box.margin=margin(-10,-10,-10,-10))
+  }
 ```
 
 # Lecture Overview
@@ -118,7 +136,7 @@ United Nations Universal Declaration of Human Rights
 ]
 
 .pull-right[
-<img src="../../../media/eleanor-roosevelt.jpg" style="width: 80%; height: 80%;">
+<img src="../images/eleanor-roosevelt.jpg" style="width: 80%; height: 80%;">
 ]
 
 
@@ -256,7 +274,7 @@ Domestic roadblocks to human rights
 ]
 
 .pull-right[
-<img src="../../../media/james-byrnes.jpg" style="width:60%; left:30px;">
+<img src="../images/james-byrnes.jpg" style="width:60%; left:30px;">
 ]
 
 
@@ -300,7 +318,7 @@ Bricker Amendment
 
 
 .pull-right[
-<img src="../../../media/john-bricker.jpg" style="width:350px; height:425px;">
+<img src="../images/john-bricker.jpg" style="width:350px; height:425px;">
 ]
 
 
@@ -378,7 +396,7 @@ Rights and Humanitarian Affairs
 ]
 
 .pull-right[
-<img src="../../../media/james-m-wilson.jpg" style="height:400px; width: 300px;">
+<img src="../images/james-m-wilson.jpg" style="height:400px; width: 300px;">
 ]
 
 
@@ -410,7 +428,7 @@ Rights
 ]
 
 .pull-right[
-<img src="../../../media/maria-otero.jpg" style="height:400px; width: 300px;">
+<img src="../images/maria-otero.jpg" style="height:400px; width: 300px;">
 ]
 
 
@@ -469,9 +487,8 @@ class: center, middle
 
 ```{r ciri-physical-integrity-scores}
 
-library(patchwork)
 
-hr.score <- read_csv("../../../Data Files/latent-human-rights-scores/HumanRightsProtectionScores_v3.01.csv") %>% 
+hr.score <- data.table::fread(here::here("../../../Data Files/latent-human-rights-scores/humanrightsprotectionscores.csv")) %>% 
   filter(COW == 2)
 
 torture <- ggplot(hr.score, aes(x = YEAR, y = TORT)) +
@@ -479,7 +496,7 @@ torture <- ggplot(hr.score, aes(x = YEAR, y = TORT)) +
   geom_point(color = "dodgerblue1", size = 2) +
   scale_x_continuous(breaks = seq(1980, 2015, 5), limits = c(1980, 2015)) +
   scale_y_continuous(breaks = seq(0, 2, 1), limits = c(0, 2)) +
-  theme_flynn +
+  theme_flynn() +
   labs(x = "Year",
        y = "Score",
        title = "Torture")
@@ -489,7 +506,7 @@ prison <- ggplot(hr.score, aes(x = YEAR, y = POLPRIS)) +
   geom_point(color = "dodgerblue1", size = 2) +
   scale_x_continuous(breaks = seq(1980, 2015, 5), limits = c(1980, 2015)) +
   scale_y_continuous(breaks = seq(0, 2, 1), limits = c(0, 2)) +
-  theme_flynn +
+  theme_flynn() +
   labs(x = "Year",
        y = "Score",
        title = "Political Imprisonment")
@@ -499,7 +516,7 @@ kill <- ggplot(hr.score, aes(x = YEAR, y = KILL)) +
   geom_point(color = "dodgerblue1", size = 2) +
   scale_x_continuous(breaks = seq(1980, 2015, 5), limits = c(1980, 2015)) +
   scale_y_continuous(breaks = seq(0, 2, 1), limits = c(0, 2)) +
-  theme_flynn +
+  theme_flynn() +
   labs(x = "Year",
        y = "Score",
        title = "Extrajudicial Killings")
@@ -509,7 +526,7 @@ disap <- ggplot(hr.score, aes(x = YEAR, y = DISAP)) +
   geom_point(color = "dodgerblue1", size = 2) +
   scale_x_continuous(breaks = seq(1980, 2015, 5), limits = c(1980, 2015)) +
   scale_y_continuous(breaks = seq(0, 2, 1), limits = c(0, 2)) +
-  theme_flynn +
+  theme_flynn() +
   labs(x = "Year",
        y = "Score",
        title = "Disappearances")
@@ -519,8 +536,7 @@ disap <- ggplot(hr.score, aes(x = YEAR, y = DISAP)) +
 plots <- (torture | prison) / (kill | disap)
 
 plots + plot_annotation(title = "Physical Integrity Rights Measures for the United States, 1980-2012",
-                        theme = theme(plot.title = element_text(size = 22, face = "bold"),
-                                      plot.title.position = "plot"))
+                        theme = theme_flynn())
 
 ```
 
@@ -538,7 +554,7 @@ ggplot(hr.score, aes(x = YEAR, y = theta_mean)) +
   geom_line() +
   geom_ribbon(aes(ymin = theta_mean - 2*theta_sd, ymax = theta_mean + 2*theta_sd), alpha= 0.5, fill = "dodgerblue1") +
   scale_x_continuous(breaks = seq(1950, 2020, 10)) +
-  theme_flynn +
+  theme_flynn() +
   labs(x = "Year",
        y = "Score",
        title = "Latent Human Rights Score for United States, 1946-2017",
@@ -556,8 +572,8 @@ class: left, top
 
 countries <- c(2, 20, 200, 220, 255, 325, 365, 710, 740, 732)
 
-hr.score <- read_csv("../../../Data Files/latent-human-rights-scores/HumanRightsProtectionScores_v3.01.csv") %>% 
-  filter(COW %in% countries) %>% 
+hr.score <- fread(here::here("../../../Data Files/latent-human-rights-scores/humanrightsprotectionscores.csv")) %>% 
+  dplyr::filter(COW %in% countries) %>% 
   mutate(country = factor(COW, levels = c(2, 20, 200, 220, 255, 325, 365, 710, 740, 732),
                           labels = c("USA", "Canada", "UK", "France", "Germany", "Italy", "Russia/USSR", "China", "Japan", "South Korea")))
 
@@ -566,7 +582,7 @@ ggplot(hr.score, aes(x = YEAR, y = theta_mean, color = factor(country), size = c
   scale_color_brewer(palette = "Set3", name = "Country") +
   scale_size_manual(name = "Country", values = c(5, 1, 1, 1, 1, 1, 1, 1, 1, 1), 
                     labels = c("USA", "Canada" ,"UK", "France", "Germany", "Italy", "Russia/USSR", "China", "Japan", "South Korea")) +
-  theme_flynn +
+  theme_flynn() +
   labs(x = "Year",
        y = "Score",
        color = "Country",
@@ -663,7 +679,7 @@ Anwar al-Awlaki
 ]
 
 .pull-right[
-<img src="../../../media/anwar-al-awlaki.jpg" style="top:-15px; height: 450px; width:320px;">
+<img src="../images/anwar-al-awlaki.jpg" style="top:-15px; height: 450px; width:320px;">
 ]
 
 
@@ -694,7 +710,7 @@ To right: August 2014 protests in Libya after Libyan Parliament voted to request
 ]
 
 .pull-right[
-<img src="../../../media/libya-protest.jpg" style="width:100%; left:30px;">
+<img src="../images/libya-protest.jpg" style="width:100%; left:30px;">
 ]
 
 
@@ -761,7 +777,7 @@ refugee.ceiling <- readxl::read_xls(here("../../../Data Files/US Government File
 ggplot(data = refugee.ceiling) +
   geom_bar(aes(x = year, y = admitted), stat = "identity", fill = "dodgerblue1", color = "black", size = .1, alpha = .8) +
   geom_step(aes(x = year, y = Ceiling), color = "maroon", size = 2, na.rm = TRUE,  direction = "mid") +
-  theme_flynn +
+  theme_flynn() +
   scale_x_continuous(breaks = seq(2008, 2018, 1)) +
   labs(x = "Year",
        title = "Refugee ceiling and admissions, 2008-2018",
@@ -784,7 +800,7 @@ class: center, middle
 text_asylum <- pdf_text(here("../../../Data Files/US Government Files/state-department/refugee-report.pdf"))
 # table values
 text_asylum_2 <- text_asylum[9] %>% # Select page with table
-  read_lines(skip = 2, skip_empty_rows = TRUE, n_max = 38)  %>% 
+  read_lines(skip = 3, skip_empty_rows = TRUE, n_max = 38)  %>% 
   grep('\\s', ., value = TRUE) %>% 
   paste(collapse = '\n') %>% 
   read_fwf(fwf_empty(.)) %>% 
@@ -794,7 +810,7 @@ text_asylum_2 <- text_asylum[9] %>% # Select page with table
 
 ggplot(data = text_asylum_2 %>% filter(name != "Totals"), aes(x = year, y = value, group = name, fill = name)) +
   geom_bar(stat = "identity", color = "black", size = .1, alpha = .8) +
-  theme_flynn +
+  theme_flynn() +
   scale_x_continuous(breaks = seq(1980, 2015, 5), limits = c(1980, 2017)) +
   scale_y_continuous(labels = comma_format()) +
   scale_fill_brewer(palette = "Set1") +
@@ -819,7 +835,7 @@ class: center, middle
 text_asylum <- pdf_text(here("../../../Data Files/US Government Files/state-department/refugee-report.pdf"))
 # table values
 text_asylum_3_1 <- text_asylum[25] %>% # Select page with table
-  read_lines(skip = 4, skip_empty_rows = TRUE, n_max = 30)  %>% 
+  read_lines(skip = 6, skip_empty_rows = TRUE, n_max = 30)  %>% 
   grep('\\s', ., value = TRUE) %>% 
   paste(collapse = '\n') %>% 
   read_fwf(fwf_empty(.)) %>% 
@@ -847,7 +863,7 @@ refugee.combined <- rbind(text_asylum_3_1, text_asylum_3_2, text_asylum_3_3)
 ggplot(data = refugee.combined, aes(x = reorder(country, count), y = count)) +
   geom_bar(stat = "identity", fill = "deepskyblue", colour = "black", size = .1) +
   coord_flip() +
-  theme_flynn +
+  theme_flynn() +
   theme(axis.text.y = element_text(size = 6)) +
   scale_y_continuous(breaks = seq(0, 10000, 2000), limits = c(0, 10000), labels = comma_format()) +
   labs(x = "",
@@ -933,7 +949,7 @@ ill.mon.list <- list(text_ill_mon_1,
 # Adjust for fiscal year
 for(page in 1:19) {
     df_page <- text_ill_mon[[page]] %>% 
-    read_lines(skip = 26, skip_empty_rows = TRUE, n_max = 4)  %>% 
+    read_lines(skip = 29, skip_empty_rows = TRUE, n_max = 4)  %>% 
     grep('\\s', ., value = TRUE) %>% 
     paste(collapse = '\n') %>% 
     read_fwf(fwf_empty(.)) %>% 
@@ -951,22 +967,22 @@ for(page in 1:19) {
                     "September"= "X13" )) %>% 
     pivot_longer(cols = (2:13)) %>% 
     arrange(X1, name) %>% 
-    group_by(X1) %>% 
+    dplyr::group_by(X1) %>% 
     ungroup() %>% 
     dplyr::rename("Location" = "X1", "month" = "name") %>% 
-    mutate(year = ifelse(month == "October" | month == "November" | month == "December", 1998+page, 1999+page))
+    dplyr::mutate(year = ifelse(month == "October" | month == "November" | month == "December", 1998+page, 1999+page))
     
     ill.mon.list[[page]] <- df_page
 }
 
 ill.mon.df <- plyr::rbind.fill(ill.mon.list) %>% 
-  filter(month != "X14" & Location != "Monthly Total") %>% 
+  filter(month != "X14" & Location != "Monthly Total" & Location != "Yuma") %>% 
   mutate(date = as.Date(paste(year, month, 1, sep = "-"), format = "%Y-%b-%d"))
 
 # Monthly illegal apphrensions
 ggplot(data = ill.mon.df, aes(x = date, y = value, group = Location, fill = Location)) +
   geom_area(position = "stack", stat = "identity", color = "black", size = .1, alpha = .8) +
-  theme_flynn +
+  theme_flynn() +
   scale_x_date(breaks = seq(as.Date("1999-10-01"), as.Date("2018-09-01"), by = "24 months"), labels = date_format("%Y-%b")) +
   scale_y_continuous(breaks = seq(0, 220000, 20000), labels = comma_format()) +
   scale_fill_brewer(palette = "Spectral") +
@@ -989,7 +1005,7 @@ class: center, middle
 text_apprehensions <- pdf_text(here("../../../Data Files/US Government Files/customs-border-patrol/bp-total-apps-fy1925-fy2018.pdf"))
 
 df.apprehensions <- text_apprehensions %>% 
-  read_lines(skip = 3, skip_empty_rows = TRUE)  %>% 
+  read_lines(skip = 5, skip_empty_rows = TRUE)  %>% 
   grep('\\s', ., value = TRUE) %>% 
   paste(collapse = '\n') %>% 
   read_fwf(fwf_empty(.)) %>% 
@@ -997,7 +1013,7 @@ df.apprehensions <- text_apprehensions %>%
   plyr::rename(c("X1" = "Year", "X2" = "Count")) -> df.apprehensions.1 
   
 df.apprehensions <- text_apprehensions %>% 
-  read_lines(skip = 3, skip_empty_rows = TRUE)  %>% 
+  read_lines(skip = 5, skip_empty_rows = TRUE)  %>% 
   grep('\\s', ., value = TRUE) %>% 
   paste(collapse = '\n') %>% 
   read_fwf(fwf_empty(.)) %>% 
@@ -1009,7 +1025,7 @@ df.apprehensions <- text_apprehensions %>%
 # total illegal apprehensions by year 
 ggplot(data = df.apprehensions.com, aes(x = Year, y = Count)) +
   geom_area(fill = "dodgerblue1", color = "black", size = .1, alpha = .8) +
-  theme_flynn +
+  theme_flynn() +
   scale_x_continuous(breaks = seq(1925, 2019, 10)) +
   scale_y_continuous(breaks = seq(0, 1750000, 250000), label = comma_format()) +
   labs(x = "Year",
@@ -1037,8 +1053,8 @@ imm.backlog <- readxl::read_xlsx(here("../../../Data Files/syracuse-tracfed/immi
 ggplot(data = subset(imm.backlog, cases>=2000), aes(x = reorder(country, cases), y = cases)) +
   geom_bar(stat = "identity", fill = "dodgerblue1", color = "black", size = .1, alpha = .8) +
   coord_flip() +
-  theme_flynn +
-  scale_y_continuous(breaks = seq(0, 200000, 25000), limits = c(0,200000), label = comma_format()) +
+  theme_flynn() +
+  scale_y_continuous(breaks = seq(0, 200000, 25000), limits = c(0,200000), label = comma_format(), expand = c(0, 1)) +
   labs(x = "",
        y = "Count",
        title = "Immigration case backlog by country of origin, FY2019",
@@ -1067,7 +1083,7 @@ ggplot(data = imm.delay, aes(x = as.numeric(delay))) +
   geom_histogram(fill = "dodgerblue1", binwidth = 30 , color = "black", size = .1, alpha = .8) +
   annotate("segment", x = as.numeric(la.value), xend = as.numeric(la.value), y = 18, yend = 7, colour = "red", size=1.5, alpha = 1.0, arrow=arrow(length = unit(0.25, "cm"), type = "closed")) +  
   annotate("text", x = as.numeric(la.value), y = 21, hjust = 0, size = 3, label = paste("Court location:\nLos Angeles, CA\nDelay: ", la.value, " Days")) +
-  theme_flynn +
+  theme_flynn() +
   scale_x_continuous(breaks = seq(0, 8000, 1000)) +
   scale_y_continuous() +
   labs(x = "Days",
@@ -1153,7 +1169,7 @@ Fallout
 
 
 .pull-right[
-<img src="../../../media/immigrant-child-picture.jpg" style="height: 325px; width: 450px;">
+<img src="../images/immigrant-child-picture.jpg" style="height: 325px; width: 450px;">
 ]
 
 
